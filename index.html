@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WeatherX - Live Weather</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app">
+        <h1 class="title">🌤 Live Weather</h1>
+
+        <div class="glass-card main-card">
+            <h2 id="location">Fetching location...</h2>
+            <div class="temperature" id="temp">--°C</div>
+            <div class="condition" id="condition">Loading...</div>
+        </div>
+
+        <div class="glass-card small-card">
+            <div>💧 Humidity: <span id="humidity">--</span>%</div>
+            <div>🌡 Feels Like: <span id="feels">--</span>°C</div>
+            <div>🌧 Rain Chance: <span id="rain">--</span>%</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
