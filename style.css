@@ -7,33 +7,25 @@
 body {
     font-family: 'Noto Sans Malayalam', sans-serif;
     height: 100vh;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    overflow: hidden;
-
-    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1e3c72, #2a5298);
-    background-size: 500% 500%;
-    animation: gradientBG 18s ease infinite;
-}
-
-@keyframes gradientBG {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
+    transition: background 1s ease;
 }
 
 .app {
+    position: relative;
+    z-index: 10;
     text-align: center;
     width: 92%;
     max-width: 430px;
 }
 
 .title {
-    font-size: 30px;
+    font-size: 28px;
     margin-bottom: 20px;
-    animation: fadeDown 1s ease;
 }
 
 .glass-card {
@@ -43,23 +35,12 @@ body {
     padding: 25px;
     margin-bottom: 18px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    animation: fadeUp 1.2s ease;
-}
-
-.main-card {
-    animation-delay: 0.2s;
 }
 
 .temperature {
     font-size: 58px;
-    font-weight: 700;
+    font-weight: bold;
     margin: 15px 0;
-    animation: pulse 3s infinite;
-}
-
-.condition {
-    font-size: 20px;
-    opacity: 0.9;
 }
 
 .small-card {
@@ -67,20 +48,44 @@ body {
     line-height: 2;
 }
 
-/* Animations */
-
-@keyframes fadeUp {
-    from {opacity: 0; transform: translateY(40px);}
-    to {opacity: 1; transform: translateY(0);}
+/* 🌧 Rain Animation */
+#rain-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
 }
 
-@keyframes fadeDown {
-    from {opacity: 0; transform: translateY(-40px);}
-    to {opacity: 1; transform: translateY(0);}
+.raindrop {
+    position: absolute;
+    width: 2px;
+    height: 15px;
+    background: rgba(255,255,255,0.7);
+    animation: rainFall linear infinite;
 }
 
-@keyframes pulse {
-    0% {transform: scale(1);}
-    50% {transform: scale(1.08);}
-    100% {transform: scale(1);}
+@keyframes rainFall {
+    from { transform: translateY(-100px); }
+    to { transform: translateY(100vh); }
+}
+
+/* ☀ Sun Animation */
+#sun-container {
+    position: fixed;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffdd00, #ff9900);
+    top: 50px;
+    right: 50px;
+    box-shadow: 0 0 80px #ffdd00;
+    display: none;
+    animation: sunGlow 3s ease-in-out infinite;
+}
+
+@keyframes sunGlow {
+    0% { box-shadow: 0 0 40px #ffdd00; }
+    50% { box-shadow: 0 0 100px #ff9900; }
+    100% { box-shadow: 0 0 40px #ffdd00; }
 }
