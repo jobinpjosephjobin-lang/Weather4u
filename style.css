@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+
+    background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #203a43);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+.app {
+    text-align: center;
+    width: 90%;
+    max-width: 420px;
+}
+
+.title {
+    font-size: 32px;
+    margin-bottom: 20px;
+    animation: fadeDown 1s ease;
+}
+
+.glass-card {
+    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.15);
+    border-radius: 25px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    animation: fadeUp 1.2s ease;
+}
+
+.main-card {
+    animation-delay: 0.2s;
+}
+
+.small-card {
+    font-size: 18px;
+    line-height: 2;
+}
+
+.temperature {
+    font-size: 60px;
+    font-weight: 700;
+    margin: 15px 0;
+    animation: pulse 3s infinite;
+}
+
+.condition {
+    font-size: 20px;
+    opacity: 0.9;
+}
+
+@keyframes fadeUp {
+    from {opacity: 0; transform: translateY(40px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fadeDown {
+    from {opacity: 0; transform: translateY(-40px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes pulse {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.05);}
+    100% {transform: scale(1);}
+}
