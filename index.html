@@ -2,7 +2,7 @@
 <html lang="ml">
 <head>
     <meta charset="UTF-8">
-    <title>ലൈവ് കാലാവസ്ഥ വിവരങ്ങൾ</title>
+    <title>ലൈവ് കാലാവസ്ഥ</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;700&display=swap" rel="stylesheet">
@@ -10,28 +10,28 @@
 </head>
 <body>
 
+    <!-- Animation Containers -->
+    <div id="rain-container"></div>
+    <div id="sun-container"></div>
+
     <div class="app">
         <h1 class="title">🌦 ലൈവ് കാലാവസ്ഥ</h1>
 
-        <!-- നിലവിലെ കാലാവസ്ഥ -->
         <div class="glass-card main-card">
             <h2 id="location">സ്ഥലം കണ്ടെത്തുന്നു...</h2>
             <div class="temperature" id="temp">--°C</div>
             <div class="condition" id="condition">ലോഡിംഗ്...</div>
         </div>
 
-        <!-- ഇന്നത്തെ വിശദാംശങ്ങൾ -->
         <div class="glass-card small-card">
             <div>💧 ഈർപ്പം: <span id="humidity">--</span>%</div>
             <div>🌡 അനുഭവപ്പെടുന്നത്: <span id="feels">--</span>°C</div>
             <div>🌧 ഇന്നത്തെ മഴ സാധ്യത: <span id="rain">--</span>%</div>
         </div>
 
-        <!-- അടുത്ത 2 ദിവസത്തെ പ്രവചനം -->
         <div class="glass-card small-card">
             <div id="forecast">പ്രവചനം ലോഡിംഗ്...</div>
         </div>
-
     </div>
 
     <script src="script.js"></script>
