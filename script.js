@@ -7,9 +7,7 @@ if (navigator.geolocation) {
 }
 
 function success(position) {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
-    fetchWeather(lat, lon);
+    fetchWeather(position.coords.latitude, position.coords.longitude);
 }
 
 function error() {
@@ -22,7 +20,9 @@ function fetchWeather(lat, lon) {
         .then(res => res.json())
         .then(data => {
 
-            // നിലവിലെ കാലാവസ്ഥ
+            const rainChance = data.forecast.forecastday[0].day.daily_chance_of_rain;
+            const condition = data.current.condition.text;
+
             document.getElementById("location").innerText =
                 `${data.location.name}, ${data.location.region}`;
 
@@ -30,7 +30,7 @@ function fetchWeather(lat, lon) {
                 `${data.current.temp_c}°C`;
 
             document.getElementById("condition").innerText =
-                translateCondition(data.current.condition.text);
+                translateCondition(condition);
 
             document.getElementById("humidity").innerText =
                 data.current.humidity;
@@ -38,29 +38,57 @@ function fetchWeather(lat, lon) {
             document.getElementById("feels").innerText =
                 data.current.feelslike_c;
 
-            document.getElementById("rain").innerText =
-                data.forecast.forecastday[0].day.daily_chance_of_rain;
+            document.getElementById("rain").innerText = rainChance;
 
-            // അടുത്ത 2 ദിവസത്തെ പ്രവചനം
+            // Forecast
             const tomorrow = data.forecast.forecastday[1];
             const dayAfter = data.forecast.forecastday[2];
 
-            const forecastHTML = `
+            document.getElementById("forecast").innerHTML = `
                 📅 നാളെ: ${getPrediction(tomorrow.day.daily_chance_of_rain)} <br><br>
                 📅 മറ്റന്നാൾ: ${getPrediction(dayAfter.day.daily_chance_of_rain)}
             `;
 
-            document.getElementById("forecast").innerHTML = forecastHTML;
+            // 🎬 Animation Logic
+            applyAnimation(rainChance, condition);
 
-        })
-        .catch(() => {
-            alert("കാലാവസ്ഥ വിവരങ്ങൾ ലഭ്യമല്ല");
         });
 }
 
-// മഴ / സൂര്യപ്രകാശം തീരുമാനിക്കൽ
-function getPrediction(rainChance) {
+function applyAnimation(rainChance, condition) {
 
+    const rainContainer = document.getElementById("rain-container");
+    const sunContainer = document.getElementById("sun-container");
+
+    rainContainer.innerHTML = "";
+    sunContainer.style.display = "none";
+
+    if (rainChance >= 50) {
+        document.body.style.background = "linear-gradient(to bottom, #1e3c72, #2a5298)";
+        createRain();
+    }
+    else if (condition.includes("Sunny")) {
+        document.body.style.background = "linear-gradient(to bottom, #f7971e, #ffd200)";
+        sunContainer.style.display = "block";
+    }
+    else {
+        document.body.style.background = "linear-gradient(to bottom, #757f9a, #d7dde8)";
+    }
+}
+
+function createRain() {
+    const rainContainer = document.getElementById("rain-container");
+
+    for (let i = 0; i < 120; i++) {
+        const drop = document.createElement("div");
+        drop.classList.add("raindrop");
+        drop.style.left = Math.random() * 100 + "vw";
+        drop.style.animationDuration = (Math.random() * 1 + 0.5) + "s";
+        rainContainer.appendChild(drop);
+    }
+}
+
+function getPrediction(rainChance) {
     if (rainChance >= 50) {
         return `മഴയ്ക്ക് സാധ്യത 🌧 (${rainChance}%)`;
     } else {
@@ -68,20 +96,17 @@ function getPrediction(rainChance) {
     }
 }
 
-// കാലാവസ്ഥ വിവരണം മലയാളത്തിലേക്ക് മാറ്റൽ
 function translateCondition(condition) {
-
     const translations = {
         "Sunny": "സൂര്യപ്രകാശം ☀️",
-        "Partly cloudy": "ഭാഗികമായി മേഘാവൃതം 🌤",
         "Cloudy": "മേഘാവൃതം ☁️",
-        "Overcast": "കട്ടിയുള്ള മേഘാവൃതം ☁️",
-        "Mist": "മഞ്ഞ് 🌫",
-        "Rain": "മഴ 🌧",
-        "Light rain": "ലഘു മഴ 🌦",
-        "Heavy rain": "കടുത്ത മഴ 🌧",
-        "Thunderstorm": "ഇടിമിന്നൽ മഴ ⛈"
+        "Partly cloudy": "ഭാഗികമായി മേഘാവൃതം 🌤",
+        "Rain": "മഴ 🌧"
     };
-
     return translations[condition] || condition;
 }
+
+// 🔄 15 മിനിറ്റ് റിഫ്രഷ്
+setInterval(() => {
+    location.reload();
+}, 15 * 60 * 1000);
