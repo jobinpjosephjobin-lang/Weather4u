@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Noto Sans Malayalam', sans-serif;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -13,9 +13,9 @@ body {
     color: white;
     overflow: hidden;
 
-    background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #203a43);
-    background-size: 400% 400%;
-    animation: gradientBG 12s ease infinite;
+    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1e3c72, #2a5298);
+    background-size: 500% 500%;
+    animation: gradientBG 18s ease infinite;
 }
 
 @keyframes gradientBG {
@@ -26,22 +26,22 @@ body {
 
 .app {
     text-align: center;
-    width: 90%;
-    max-width: 420px;
+    width: 92%;
+    max-width: 430px;
 }
 
 .title {
-    font-size: 32px;
+    font-size: 30px;
     margin-bottom: 20px;
     animation: fadeDown 1s ease;
 }
 
 .glass-card {
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(18px);
     background: rgba(255,255,255,0.15);
     border-radius: 25px;
     padding: 25px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     animation: fadeUp 1.2s ease;
 }
@@ -50,13 +50,8 @@ body {
     animation-delay: 0.2s;
 }
 
-.small-card {
-    font-size: 18px;
-    line-height: 2;
-}
-
 .temperature {
-    font-size: 60px;
+    font-size: 58px;
     font-weight: 700;
     margin: 15px 0;
     animation: pulse 3s infinite;
@@ -66,6 +61,13 @@ body {
     font-size: 20px;
     opacity: 0.9;
 }
+
+.small-card {
+    font-size: 18px;
+    line-height: 2;
+}
+
+/* Animations */
 
 @keyframes fadeUp {
     from {opacity: 0; transform: translateY(40px);}
@@ -79,6 +81,6 @@ body {
 
 @keyframes pulse {
     0% {transform: scale(1);}
-    50% {transform: scale(1.05);}
+    50% {transform: scale(1.08);}
     100% {transform: scale(1);}
 }
